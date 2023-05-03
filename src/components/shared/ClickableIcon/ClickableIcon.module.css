@@ -1,0 +1,16 @@
+.icon {
+ background: none;
+ border: none;
+ transition: filter 200ms;
+}
+
+.icon:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+    transition: filter 200ms;
+}
+
+.icon:active {
+    filter: brightness(1);
+    transition: filter 200ms;
+}

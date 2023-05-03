@@ -1,0 +1,22 @@
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .buttons > svg {
+    transition: transform 150ms;
+  }
+  
+  .buttons > svg:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform 150ms;
+  }
+  
+  .buttons > svg:active {
+      transform: scale(0.8);
+      transition: transform 150ms;
+    }
+  

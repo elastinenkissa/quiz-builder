@@ -1,0 +1,18 @@
+.container:hover {
+  cursor: pointer;
+}
+
+.container > svg {
+  font-size: 1.5em;
+  transition: font-size 200ms;
+}
+
+.container:hover > svg {
+  font-size: 50px;
+  transition: font-size 200ms;
+}
+
+.container:active > svg {
+  font-size: 1em;
+  transition: font-size 100ms;
+}

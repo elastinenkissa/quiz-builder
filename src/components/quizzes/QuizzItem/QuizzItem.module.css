@@ -1,0 +1,21 @@
+.container:hover > p {
+  filter: blur(2px) contrast(0.7);
+  user-select: none;
+  transition: filter 300ms;
+}
+
+.container > p {
+  transition: filter 300ms;
+}
+
+.container {
+  position: relative;
+}
+
+
+
+.container:hover > div {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 300ms;
+}
