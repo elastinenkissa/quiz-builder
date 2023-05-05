@@ -6,19 +6,24 @@ import { Delete, Edit, Visibility } from '@mui/icons-material';
 import ClickableIcon from '../../../shared/ClickableIcon/ClickableIcon';
 
 import { Quiz } from '../../../../util/types/quiz';
+import { baseUrl } from '../../../../util/config/baseApiUrl';
 
-import classes from './QuizManagement.module.css';
+import classes from './QuizOptions.module.css';
 
-interface QuizManagementProps {
+interface QuizOptionsProps {
   quiz: Quiz;
-  onDelete: () => void;
+  onDelete: (id: number) => void;
 }
 
-const QuizManagement: FC<QuizManagementProps> = (props) => {
+const QuizOptions: FC<QuizOptionsProps> = (props) => {
   const navigate = useNavigate();
 
   const displayQuizHandler = () => {
     navigate(`/${props.quiz.id}`);
+  };
+
+  const editQuizHandler = () => {
+    navigate(`/manage/${props.quiz.id}`);
   };
 
   const deleteQuizHandler = async () => {
@@ -27,10 +32,10 @@ const QuizManagement: FC<QuizManagementProps> = (props) => {
         `Da li si siguran da želiš obrisati kviz ${props.quiz.name} `
       )
     ) {
-      await fetch(`http://localhost:3001/quizzes/${props.quiz.id}`, {
+      await fetch(`${baseUrl}/quizzes/${props.quiz.id}`, {
         method: 'DELETE'
       });
-      props.onDelete();
+      props.onDelete(props.quiz.id);
     }
   };
 
@@ -40,7 +45,10 @@ const QuizManagement: FC<QuizManagementProps> = (props) => {
         onClick={displayQuizHandler}
         icon={<Visibility htmlColor="#ff99cc" fontSize="large" />}
       />
-      <ClickableIcon icon={<Edit fontSize="large" htmlColor="#b5ecda" />} />
+      <ClickableIcon
+        icon={<Edit fontSize="large" htmlColor="#b5ecda" />}
+        onClick={editQuizHandler}
+      />
       <ClickableIcon
         onClick={deleteQuizHandler}
         icon={<Delete htmlColor="#fd6d89" fontSize="large" />}
@@ -49,4 +57,4 @@ const QuizManagement: FC<QuizManagementProps> = (props) => {
   );
 };
 
-export default QuizManagement;
+export default QuizOptions;

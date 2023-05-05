@@ -7,10 +7,12 @@ import {
 } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import Quizzes, {
-  loader as quizzesLoader
-} from './pages/quizzes/Quizzes/Quizzes';
-import Quiz, { loader as quizLoader } from './pages/quizzes/Quiz/Quiz';
+import ManageQuiz from './pages/quizzes/ManageQuiz/ManageQuiz';
+import Quizzes from './pages/quizzes/Quizzes/Quizzes';
+import Quiz from './pages/quizzes/Quiz/Quiz';
+
+import { quizLoader } from './util/loaders/quizLoader';
+import { quizzesLoader } from './util/loaders/quizzesLoader';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +21,7 @@ const router = createBrowserRouter(
         <div
           style={{
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'center'
           }}
         >
           <Outlet />
@@ -29,6 +31,9 @@ const router = createBrowserRouter(
     >
       <Route index element={<Quizzes />} loader={quizzesLoader} />
       <Route path=":id" element={<Quiz />} loader={quizLoader} />
+      <Route path="manage">
+        <Route path=":id" element={<ManageQuiz />} loader={quizLoader} />
+      </Route>
     </Route>
   )
 );

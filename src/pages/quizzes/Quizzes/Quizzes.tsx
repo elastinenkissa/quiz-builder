@@ -21,9 +21,9 @@ const Quizzes: FC = () => {
           <QuizzItem
             key={currentQuiz.id}
             quiz={currentQuiz}
-            onDelete={() =>
+            onDelete={(id) =>
               setQuizzes((prevQuizzes) =>
-                prevQuizzes.filter((quiz) => quiz.id !== currentQuiz.id)
+                prevQuizzes.filter((quiz) => quiz.id !== id)
               )
             }
           />
@@ -35,14 +35,3 @@ const Quizzes: FC = () => {
 };
 
 export default Quizzes;
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const loader = async () => {
-  const response = await fetch('http://localhost:3001/quizzes');
-
-  if (!response.ok) {
-    throw { message: 'Failed to fetch quizzes.', status: 500 };
-  }
-
-  return response.json();
-};

@@ -19,9 +19,9 @@ const Card: FC<CardProps> = (props) => {
         fontSize: 20,
         width: 200,
         height: 150,
-        ...props.style,
         backgroundColor: 'palevioletred',
-        color: 'white'
+        color: 'white',
+        ...props.style,
       }}
       className={props.className}
       onClick={props.onClick}

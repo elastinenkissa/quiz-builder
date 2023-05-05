@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Card from '../../shared/Card/Card';
-import QuizManagement from './QuizManagement/QuizManagement';
+import QuizOptions from './QuizOptions/QuizOptions';
 
 import { Quiz } from '../../../util/types/quiz';
 
@@ -9,7 +9,7 @@ import classes from './QuizzItem.module.css';
 
 interface QuizzItemProps {
   quiz: Quiz;
-  onDelete: () => void;
+  onDelete: (id: number) => void;
 }
 
 const QuizzItem: FC<QuizzItemProps> = (props) => {
@@ -17,7 +17,10 @@ const QuizzItem: FC<QuizzItemProps> = (props) => {
     <>
       <Card className={classes.container}>
         <p>{props.quiz.name}</p>
-        <QuizManagement onDelete={props.onDelete} quiz={props.quiz} />
+        <QuizOptions
+          onDelete={(id) => props.onDelete(id)}
+          quiz={props.quiz}
+        />
       </Card>
     </>
   );
