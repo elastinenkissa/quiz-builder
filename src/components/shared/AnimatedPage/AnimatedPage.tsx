@@ -23,7 +23,6 @@ const AnimatedPage: FC<AnimatedPageProps> = (props) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '2rem',
       }}
     >
       {props.children}
