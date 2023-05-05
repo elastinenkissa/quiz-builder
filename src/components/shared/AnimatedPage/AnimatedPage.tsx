@@ -19,7 +19,12 @@ const AnimatedPage: FC<AnimatedPageProps> = (props) => {
       animate="animate"
       exit="exit"
       transition={{ duration: 0.5 }}
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '5rem' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '2rem',
+      }}
     >
       {props.children}
     </motion.div>

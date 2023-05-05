@@ -17,14 +17,10 @@ import ErrorBoundary from './components/shared/ErrorBoundary/ErrorBoundary';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route ErrorBoundary={ErrorBoundary}
+    <Route
+      ErrorBoundary={ErrorBoundary}
       element={
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
+        <div style={{textAlign: 'center'}}>
           <Outlet />
         </div>
       }

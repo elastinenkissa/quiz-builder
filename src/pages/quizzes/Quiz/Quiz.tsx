@@ -18,7 +18,9 @@ const Quiz: FC = () => {
 
   return (
     <AnimatedPage>
-      <h1 style={{ marginTop: '-5rem', marginBottom: '5rem' }}>{`${quiz.name} ${
+      <h1
+        style={{ marginTop: '-5rem', marginBottom: '5rem', width: '80vw' }}
+      >{`${quiz.name} ${
         quiz.questions.length === 0 ? 'has no questions yet' : ''
       }`}</h1>
       {quiz.questions.length > 0 && (
