@@ -1,7 +1,12 @@
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .form {
   width: 100%;
   display: grid;
   flex-direction: column;
+  height: 100%;
 }
 
 .main {

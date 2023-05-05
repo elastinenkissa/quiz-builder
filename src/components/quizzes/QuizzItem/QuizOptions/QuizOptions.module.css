@@ -13,4 +13,9 @@
 
 .buttons > button {
   height: fit-content;
+  z-index: 100;
+}
+
+.buttons:hover {
+  cursor: pointer;
 }

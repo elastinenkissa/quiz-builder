@@ -14,7 +14,7 @@ const AddQuizz: FC = () => {
     <Card
       className={classes.container}
       onClick={() => navigate('/manage/new')}
-      style={{ width: 300, height: 200 }}
+      style={{ width: 300, height: 200, padding: '2rem' }}
     >
       <Add />
     </Card>

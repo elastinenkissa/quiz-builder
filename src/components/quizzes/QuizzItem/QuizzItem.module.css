@@ -10,6 +10,8 @@
 
 .container {
   position: relative;
+  padding: 2rem;
+  word-break: break-all;
 }
 
 

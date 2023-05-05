@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useNavigate } from 'react-router';
 
-import { Delete, Edit, Visibility } from '@mui/icons-material';
+import { Delete, Visibility } from '@mui/icons-material';
 
 import ClickableIcon from '../../../shared/ClickableIcon/ClickableIcon';
 
@@ -18,15 +18,18 @@ interface QuizOptionsProps {
 const QuizOptions: FC<QuizOptionsProps> = (props) => {
   const navigate = useNavigate();
 
-  const displayQuizHandler = () => {
+  const displayQuizHandler = (event: MouseEvent) => {
+    event.stopPropagation();
     navigate(`/${props.quiz.id}`);
   };
 
-  const editQuizHandler = () => {
+  const editQuizHandler = (event: MouseEvent) => {
+    event.stopPropagation();
     navigate(`/manage/${props.quiz.id}`);
   };
 
-  const deleteQuizHandler = async () => {
+  const deleteQuizHandler = async (event: MouseEvent) => {
+    event.stopPropagation();
     if (
       window.confirm(
         `Da li si siguran da želiš obrisati kviz ${props.quiz.name} `
@@ -40,14 +43,10 @@ const QuizOptions: FC<QuizOptionsProps> = (props) => {
   };
 
   return (
-    <div className={classes.buttons}>
+    <div className={classes.buttons} onClick={editQuizHandler}>
       <ClickableIcon
         onClick={displayQuizHandler}
         icon={<Visibility htmlColor="#ff99cc" fontSize="large" />}
-      />
-      <ClickableIcon
-        icon={<Edit fontSize="large" htmlColor="#b5ecda" />}
-        onClick={editQuizHandler}
       />
       <ClickableIcon
         onClick={deleteQuizHandler}

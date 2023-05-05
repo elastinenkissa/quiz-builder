@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, MouseEvent } from 'react';
 
 import classes from './ClickableIcon.module.css';
 
 interface ClickableIconProps {
   icon: ReactNode;
-  onClick: () => void;
+  onClick: (event: MouseEvent) => void;
   onHoverOver?: () => void;
   onHoverOut?: () => void
   submit?: boolean;

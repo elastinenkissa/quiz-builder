@@ -45,8 +45,13 @@ server.post('/quizzes', (req, res) => {
 server.delete('/quizzes/:id', (req, res) => {
   const quizIndex = router.db
     .get('quizzes')
-    .findIndex({ id: req.params.id })
+    .findIndex({ id: +req.params.id })
     .value();
+
+  console.log(quizIndex);
+
+  const quizzes = router.db.get('quizzes').value();
+  console.log(quizzes[quizIndex]);
 
   router.db.get('quizzes').splice(quizIndex, 1).write();
 

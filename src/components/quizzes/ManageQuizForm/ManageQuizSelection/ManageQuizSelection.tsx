@@ -19,6 +19,7 @@ interface ManageQuizSelectionProps {
 }
 
 const ManageQuizSelection: FC<ManageQuizSelectionProps> = (props) => {
+  const [initialQuestions, setInitialQuestions] = useState<Array<Question>>([]);
   const [questions, setQuestions] = useState<Array<Question>>([]);
 
   const [newQuestionQuestion, setNewQuestionQuestion] = useState<string>('');
@@ -37,7 +38,7 @@ const ManageQuizSelection: FC<ManageQuizSelectionProps> = (props) => {
 
       const fetchedQuestions: Array<Question> = await response.json();
 
-      setQuestions(
+      setInitialQuestions(
         fetchedQuestions.filter(
           (fetchedQuestion) =>
             !props.questions.some(
@@ -51,13 +52,13 @@ const ManageQuizSelection: FC<ManageQuizSelectionProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    setQuestions((prevQuestion) =>
-      prevQuestion.filter(
+    setQuestions(
+      initialQuestions.filter(
         (prevQuestion) =>
           !props.questions.some((question) => question.id === prevQuestion.id)
       )
     );
-  }, [props.questions]);
+  }, [props.questions, initialQuestions]);
 
   const isNewQuestion = existingQuestionId?.length === 0;
 

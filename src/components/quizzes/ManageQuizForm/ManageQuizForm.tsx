@@ -63,10 +63,13 @@ const ManageQuizForm: FC<ManageQuizFormProps> = (props) => {
         width: '80vw',
         padding: '3rem',
         height: 'fit-content',
+        maxHeight: '150vh',
         marginTop: '10rem',
         marginBottom: '10rem',
-        backgroundColor: '#a1c8e5'
+        backgroundColor: '#a1c8e5',
+        overflow: 'scroll'
       }}
+      className={classes.container}
     >
       <form onSubmit={saveQuizHandler} className={classes.form}>
         <ManageQuizName
@@ -85,7 +88,7 @@ const ManageQuizForm: FC<ManageQuizFormProps> = (props) => {
           />
           <ClickableIcon
             submit
-            icon={<Save sx={{ fontSize: 70, marginTop: '4rem' }} />}
+            icon={<Save sx={{ fontSize: 70, marginTop: '2rem', marginBottom: '3rem' }} />}
             onClick={() => {
               return;
             }}
