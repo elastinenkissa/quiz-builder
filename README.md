@@ -11,4 +11,4 @@ Follow these steps to run the app on your machine
 3. Run `npm install` to install dependencies
 4. Run `npm run start:server` to start the fake server
 5. In the same folder, open a new terminal and run `npm start` to build the project and start in production
-6. Open the URL generated in the terminal and start using the app
+6. Open the generated URL in your web browser and start using the app
