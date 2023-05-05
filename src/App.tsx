@@ -13,10 +13,11 @@ import Quiz from './pages/quizzes/Quiz/Quiz';
 
 import { quizLoader } from './util/loaders/quizLoader';
 import { quizzesLoader } from './util/loaders/quizzesLoader';
+import ErrorBoundary from './components/shared/ErrorBoundary/ErrorBoundary';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
+    <Route ErrorBoundary={ErrorBoundary}
       element={
         <div
           style={{

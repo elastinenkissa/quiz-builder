@@ -7,13 +7,18 @@ import { Question } from '../../../../util/types/question';
 
 interface QuestionsProps {
   questions: Array<Question>;
+  onRemoveQuestion: (questionId: number) => void;
 }
 
 const Questions: FC<QuestionsProps> = (props) => {
   return (
     <>
       {props.questions.map((question) => (
-        <QuestionItem question={question} key={uuid()} />
+        <QuestionItem
+          question={question}
+          key={uuid()}
+          onRemoveQuestion={() => props.onRemoveQuestion(question.id!)}
+        />
       ))}
     </>
   );

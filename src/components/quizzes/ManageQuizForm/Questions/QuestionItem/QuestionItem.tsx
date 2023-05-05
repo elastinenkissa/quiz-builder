@@ -8,18 +8,31 @@ import { Remove } from '@mui/icons-material';
 
 interface QuestionItemProps {
   question: Question;
+  onRemoveQuestion: () => void;
 }
 
 const QuestionItem: FC<QuestionItemProps> = (props) => {
   return (
     <QuestionContainer style={{ position: 'relative' }}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '80%',
+          textAlign: 'center'
+        }}
+      >
         <p>{props.question.question}</p>
-        <p>{props.question.answer}</p>
+        <h2>{props.question.answer}</h2>
       </div>
-      <div style={{ position: 'absolute', right: 0 }}>
-        <ClickableIcon icon={<Remove />} />
-      </div>
+      {props.question.id && (
+        <div style={{ position: 'absolute', right: 0, top: 0 }}>
+          <ClickableIcon
+            onClick={props.onRemoveQuestion}
+            icon={<Remove fontSize="large" />}
+          />
+        </div>
+      )}
     </QuestionContainer>
   );
 };

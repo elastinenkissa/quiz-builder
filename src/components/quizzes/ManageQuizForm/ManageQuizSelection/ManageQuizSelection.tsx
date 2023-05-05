@@ -15,6 +15,7 @@ import classes from './ManageQuizSelection.module.css';
 
 interface ManageQuizSelectionProps {
   onAddQuestion: (question: Question) => void;
+  questions: Array<Question>;
 }
 
 const ManageQuizSelection: FC<ManageQuizSelectionProps> = (props) => {
@@ -34,11 +35,29 @@ const ManageQuizSelection: FC<ManageQuizSelectionProps> = (props) => {
         throw { message: 'Failed to fetch questions.', status: 500 };
       }
 
-      setQuestions(await response.json());
+      const fetchedQuestions: Array<Question> = await response.json();
+
+      setQuestions(
+        fetchedQuestions.filter(
+          (fetchedQuestion) =>
+            !props.questions.some(
+              (question) => question.id === fetchedQuestion.id
+            )
+        )
+      );
     };
 
     fetchQuestions();
   }, []);
+
+  useEffect(() => {
+    setQuestions((prevQuestion) =>
+      prevQuestion.filter(
+        (prevQuestion) =>
+          !props.questions.some((question) => question.id === prevQuestion.id)
+      )
+    );
+  }, [props.questions]);
 
   const isNewQuestion = existingQuestionId?.length === 0;
 

@@ -13,8 +13,8 @@ interface NewExistingQuestionProps {
 const NewExistingQuestion: FC<NewExistingQuestionProps> = (props) => {
   return (
     <FormControl
-      sx={{ backgroundColor: 'wheat', width: '40%' }}
-      color="secondary"
+      sx={{ backgroundColor: 'white', width: '40%' }}
+      color="primary"
     >
       <InputLabel>Select a quesiton</InputLabel>
       <Select
@@ -28,7 +28,7 @@ const NewExistingQuestion: FC<NewExistingQuestionProps> = (props) => {
         </MenuItem>
         {props.questions.map((question) => (
           <MenuItem key={question.id} value={question.id}>
-            {question.question.slice(0, 15)}...
+            {question.question.slice(0, 50)}...
           </MenuItem>
         ))}
       </Select>

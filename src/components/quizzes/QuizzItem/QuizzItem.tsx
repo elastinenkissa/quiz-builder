@@ -15,7 +15,7 @@ interface QuizzItemProps {
 const QuizzItem: FC<QuizzItemProps> = (props) => {
   return (
     <>
-      <Card className={classes.container}>
+      <Card className={classes.container} style={{width: 300, height: 200}}>
         <p>{props.quiz.name}</p>
         <QuizOptions
           onDelete={(id) => props.onDelete(id)}

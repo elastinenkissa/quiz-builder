@@ -11,7 +11,11 @@ const AddQuizz: FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className={classes.container} onClick={() => navigate('/manage/new')}>
+    <Card
+      className={classes.container}
+      onClick={() => navigate('/manage/new')}
+      style={{ width: 300, height: 200 }}
+    >
       <Add />
     </Card>
   );

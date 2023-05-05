@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FC, FormEvent, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Save } from '@mui/icons-material';
 
@@ -14,7 +15,6 @@ import { Question } from '../../../util/types/question';
 import { baseUrl } from '../../../util/config/baseApiUrl';
 
 import classes from './ManageQuizForm.module.css';
-import { useParams } from 'react-router';
 
 interface ManageQuizFormProps {
   quiz: Quiz;
@@ -25,6 +25,8 @@ const ManageQuizForm: FC<ManageQuizFormProps> = (props) => {
   const [questions, setQuestions] = useState<Array<Question>>(
     props.quiz.questions || []
   );
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -41,15 +43,17 @@ const ManageQuizForm: FC<ManageQuizFormProps> = (props) => {
         questions
       })
     });
+
+    navigate('/');
   };
 
   const addQuestionHandler = (question: Question) => {
     setQuestions((prevQuestions) => prevQuestions.concat(question));
   };
 
-  const removeQuestionHandler = (questionId: string) => {
+  const removeQuestionHandler = (questionId: number) => {
     setQuestions((prevQuestions) =>
-      prevQuestions.filter((question) => question.id !== +questionId)
+      prevQuestions.filter((question) => question.id !== questionId)
     );
   };
 
@@ -59,9 +63,9 @@ const ManageQuizForm: FC<ManageQuizFormProps> = (props) => {
         width: '80vw',
         padding: '3rem',
         height: 'fit-content',
-        backgroundColor: 'paleturquoise',
         marginTop: '10rem',
-        marginBottom: '10rem'
+        marginBottom: '10rem',
+        backgroundColor: '#a1c8e5'
       }}
     >
       <form onSubmit={saveQuizHandler} className={classes.form}>
@@ -71,13 +75,17 @@ const ManageQuizForm: FC<ManageQuizFormProps> = (props) => {
         />
         <hr />
         <div className={classes.main}>
-          <Questions questions={questions} />
+          <Questions
+            questions={questions}
+            onRemoveQuestion={removeQuestionHandler}
+          />
           <ManageQuizSelection
             onAddQuestion={addQuestionHandler}
+            questions={questions}
           />
           <ClickableIcon
             submit
-            icon={<Save sx={{fontSize: 50, marginTop: '4rem'}} htmlColor="violet" />}
+            icon={<Save sx={{ fontSize: 70, marginTop: '4rem' }} />}
             onClick={() => {
               return;
             }}

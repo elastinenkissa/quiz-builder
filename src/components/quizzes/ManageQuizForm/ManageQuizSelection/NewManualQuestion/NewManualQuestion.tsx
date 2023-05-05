@@ -21,22 +21,24 @@ const NewManualQuesiton: FC<NewManualQuesitonProps> = (props) => {
     <div className={classes.inputs}>
       <FormControl
         sx={{
-          backgroundColor: 'wheat'
+          backgroundColor: 'white'
         }}
       >
         <TextField
           label="Question"
           multiline
           minRows={5}
-          color="secondary"
+          spellCheck={false}
+          color="primary"
           value={props.question}
           onChange={(event) => props.onInputQuestion(event.target.value)}
         />
       </FormControl>
-      <FormControl sx={{ backgroundColor: 'wheat' }} color="secondary">
+      <FormControl sx={{ backgroundColor: 'white' }} color="primary">
         <InputLabel>Answer</InputLabel>
         <OutlinedInput
           label="Answer"
+          spellCheck={false}
           value={props.answer}
           onChange={(event) => props.onInputAnswer(event.target.value)}
         />

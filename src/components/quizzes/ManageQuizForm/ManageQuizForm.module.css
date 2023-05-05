@@ -5,14 +5,14 @@
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main > div {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .main > button {
@@ -27,4 +27,6 @@
 
 .form > hr {
   width: 100%;
+  border-bottom: none;
+  border-color: rgba(0, 0, 0, 0.218);
 }

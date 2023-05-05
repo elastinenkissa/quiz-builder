@@ -18,38 +18,42 @@ const Quiz: FC = () => {
 
   return (
     <AnimatedPage>
-      <h1 style={{marginTop: '-5rem', marginBottom: '5rem'}}>{quiz.name}</h1>
-      <Card
-        style={{
-          backgroundColor: 'violet',
-          padding: '2rem',
-          width: '80vw',
-          fontSize: '1rem',
-          display: 'flex',
-          flexDirection: 'column',
-          height: 400,
-          overflow: 'hidden',
-          position: 'relative'
-        }}
-      >
-        <QuizCardContent
-          question={currentQuestion}
-          currentQuestionIndex={currentQuestionIndex}
-          onAnimationFinish={() => setControlsDisabled(false)}
-          onAnimationStart={() => setControlsDisabled(true)}
-        />
-        <QuestionSlideshowControls
-          disabled={controlsDisabled}
-          onPreviousQuestion={() =>
-            setCurrentQuestionIndex((prevIndex) => prevIndex - 1)
-          }
-          onNextQuestion={() =>
-            setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
-          }
-          currentQuestionIndex={currentQuestionIndex}
-          questions={quiz.questions}
-        />
-      </Card>
+      <h1 style={{ marginTop: '-5rem', marginBottom: '5rem' }}>{`${quiz.name} ${
+        quiz.questions.length === 0 ? 'has no questions yet' : ''
+      }`}</h1>
+      {quiz.questions.length > 0 && (
+        <Card
+          style={{
+            backgroundColor: 'violet',
+            padding: '2rem',
+            width: '80vw',
+            fontSize: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            height: 400,
+            overflow: 'hidden',
+            position: 'relative'
+          }}
+        >
+          <QuizCardContent
+            question={currentQuestion}
+            currentQuestionIndex={currentQuestionIndex}
+            onAnimationFinish={() => setControlsDisabled(false)}
+            onAnimationStart={() => setControlsDisabled(true)}
+          />
+          <QuestionSlideshowControls
+            disabled={controlsDisabled}
+            onPreviousQuestion={() =>
+              setCurrentQuestionIndex((prevIndex) => prevIndex - 1)
+            }
+            onNextQuestion={() =>
+              setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
+            }
+            currentQuestionIndex={currentQuestionIndex}
+            questions={quiz.questions}
+          />
+        </Card>
+      )}
     </AnimatedPage>
   );
 };

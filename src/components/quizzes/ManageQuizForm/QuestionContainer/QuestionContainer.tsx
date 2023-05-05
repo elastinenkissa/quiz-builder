@@ -18,7 +18,7 @@ const QuestionContainer: FC<QuestionContainerProps> = (props) => {
         height: 300,
         justifyContent: 'space-around',
         boxSizing: 'border-box',
-        backgroundColor: 'palevioletred',
+        backgroundColor: '#8fbddf',
         padding: '2rem',
         zIndex: 2,
         ...props.style
