@@ -1,4 +1,4 @@
-# Pub Quiz
+# Quizmaker
 
 Detailed readme coming soon
 
