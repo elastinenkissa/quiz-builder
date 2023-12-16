@@ -1,0 +1,22 @@
+{
+  "quizzes": [
+    {
+      "id": 1482185294609779,
+      "name": "Quiz 1",
+      "questions": [
+        {
+          "id": 187691127277999,
+          "question": "Question 1",
+          "answer": "Answer 1"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": 187691127277999,
+      "question": "Question 1",
+      "answer": "Answer 1"
+    }
+  ]
+}
