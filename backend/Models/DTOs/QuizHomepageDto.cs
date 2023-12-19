@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace backend.Models.Domains
+namespace backend.Models.DTOs
 {
-    public class Quiz
+    public class QuizHomepageDto
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
-        public ICollection<QuizQuestion>? QuizQuestions { get; set; }
     }
 }

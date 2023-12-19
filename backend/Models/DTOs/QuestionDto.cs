@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace backend.Models.Domains
 {
-    public class Question
+    public class QuestionDto
     {
         public Guid Id { get; set; }
         public required string Content { get; set; }
         public required string Answer { get; set; }
-        public ICollection<QuizQuestion>? QuizQuestions { get; set; }
     }
 }

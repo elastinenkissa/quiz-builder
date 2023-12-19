@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Interfaces;
+using backend.Models.Domains;
+using backend.Models.DTOs;
 using backend.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +26,20 @@ namespace backend.Controllers
         {
             var quizzes = await _quizContext.GetAll();
 
-            return Ok(quizzes);
+            ICollection<QuizHomepageDto> quizDtos = [];
+
+            foreach (var quiz in quizzes)
+            {
+                quizDtos.Add(
+                    new QuizHomepageDto
+                    {
+                        Id = quiz.Id,
+                        Name = quiz.Name
+                    }
+                );
+            }
+
+            return Ok(quizDtos);
         }
 
         [HttpGet]
@@ -38,7 +53,20 @@ namespace backend.Controllers
                 return NotFound();
             }
 
-            return Ok(quiz);
+            var quizDto = new QuizDto
+            {
+                Id = quiz.Id,
+                Name = quiz.Name,
+                Questions = quiz.QuizQuestions?.Select(qq => new QuestionDto
+                {
+                    Id = qq.Question.Id,
+                    Content = qq.Question.Content,
+                    Answer = qq.Question.Answer
+                }).ToList() ?? []
+            };
+
+
+            return Ok(quizDto);
         }
 
     }
