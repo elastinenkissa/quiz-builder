@@ -36,12 +36,7 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("QuizId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("QuizId");
 
                     b.ToTable("Questions");
                 });
@@ -61,15 +56,48 @@ namespace backend.Migrations
                     b.ToTable("Quizzes");
                 });
 
-            modelBuilder.Entity("backend.Models.Domains.Question", b =>
+            modelBuilder.Entity("backend.Models.Domains.QuizQuestion", b =>
                 {
+                    b.Property<Guid>("QuizId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("QuizId", "QuestionId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("QuizQuestions");
+                });
+
+            modelBuilder.Entity("backend.Models.Domains.QuizQuestion", b =>
+                {
+                    b.HasOne("backend.Models.Domains.Question", "Question")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("backend.Models.Domains.Quiz", "Quiz")
-                        .WithMany()
+                        .WithMany("QuizQuestions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Question");
+
                     b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("backend.Models.Domains.Question", b =>
+                {
+                    b.Navigation("QuizQuestions");
+                });
+
+            modelBuilder.Entity("backend.Models.Domains.Quiz", b =>
+                {
+                    b.Navigation("QuizQuestions");
                 });
 #pragma warning restore 612, 618
         }
