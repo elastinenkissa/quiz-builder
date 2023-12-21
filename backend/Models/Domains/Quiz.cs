@@ -9,6 +9,6 @@ namespace backend.Models.Domains
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
-        public ICollection<QuizQuestion>? QuizQuestions { get; set; }
+        public ICollection<QuizQuestion> QuizQuestions { get; set; } = [];
     }
 }
