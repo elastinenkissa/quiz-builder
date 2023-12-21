@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using backend.Data;
 using backend.Interfaces;
 using backend.Models.Domains;
+using backend.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repository
@@ -34,6 +35,20 @@ namespace backend.Repository
             }
 
             return quiz;
+        }
+
+
+        public async Task<Quiz> Create(string name)
+        {
+            var newQuiz = new Quiz
+            {
+                Name = name
+            };
+
+            await _context.Quizzes.AddAsync(newQuiz);
+            await _context.SaveChangesAsync();
+
+            return newQuiz;
         }
     }
 }

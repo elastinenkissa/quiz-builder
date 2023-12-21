@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Interfaces;
+using backend.Models.Domains;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -21,9 +22,23 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var questions = await _questionsContext.GetAll(); //Make DTO
+            var questions = await _questionsContext.GetAll();
 
-            return Ok(questions);
+            var questionDtos = new List<QuestionDto>();
+
+            foreach (var question in questions)
+            {
+                questionDtos.Add(
+                    new QuestionDto
+                    {
+                        Id = question.Id,
+                        Content = question.Content,
+                        Answer = question.Answer
+                    }
+                );
+            }
+
+            return Ok(questionDtos);
         }
     }
 }

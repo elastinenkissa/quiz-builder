@@ -15,10 +15,12 @@ namespace backend.Controllers
     public class QuizzesController : ControllerBase
     {
         private readonly IQuizRepository _quizContext;
+        private readonly IQuestionRepository _questionContext;
 
-        public QuizzesController(IQuizRepository quizRepository)
+        public QuizzesController(IQuizRepository quizRepository, IQuestionRepository questionRepository)
         {
             _quizContext = quizRepository;
+            _questionContext = questionRepository;
         }
 
         [HttpGet]
@@ -67,6 +69,26 @@ namespace backend.Controllers
 
 
             return Ok(quizDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] NewQuizRequestDto newQuizRequestDto)
+        {
+            var newQuiz = await _quizContext.Create(newQuizRequestDto.Name);
+
+            if (newQuiz == null)
+            {
+                return NotFound();
+            }
+
+            var questions = await _questionContext.Create(newQuizRequestDto.Questions, newQuiz.Id);
+
+            if (questions == false)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
 
     }

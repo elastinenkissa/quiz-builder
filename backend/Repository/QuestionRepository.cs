@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using backend.Data;
 using backend.Interfaces;
 using backend.Models.Domains;
+using backend.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repository
@@ -21,6 +22,52 @@ namespace backend.Repository
         public async Task<ICollection<Question>> GetAll()
         {
             return await _context.Questions.ToListAsync();
+        }
+
+        public async Task<bool> Create(ICollection<QuestionDto> questions, Guid quizId)
+        {
+            var quiz = await _context.Quizzes.FindAsync(quizId);
+
+            if (quiz == null)
+            {
+                return false;
+            }
+
+            foreach (var question in questions)
+            {
+                var existingQuestion = await _context.Questions.FindAsync(question.Id);
+
+                if (existingQuestion == null)
+                {
+                    var newQuestion = new Question
+                    {
+                        Content = question.Content,
+                        Answer = question.Answer
+                    };
+                    _context.Questions.Add(newQuestion);
+
+                    var quizQuestion = new QuizQuestion
+                    {
+                        Question = newQuestion,
+                        Quiz = quiz
+                    };
+                    _context.QuizQuestions.Add(quizQuestion);
+                }
+
+                if (existingQuestion != null)
+                {
+                    var quizQuestion = new QuizQuestion
+                    {
+                        Question = existingQuestion,
+                        Quiz = quiz
+                    };
+                    _context.QuizQuestions.Add(quizQuestion);
+                }
+            }
+
+            var saved = await _context.SaveChangesAsync();
+
+            return saved > 0 ? true : false;
         }
     }
 }
