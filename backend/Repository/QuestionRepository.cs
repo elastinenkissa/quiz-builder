@@ -65,19 +65,21 @@ namespace backend.Repository
 
         public async Task<bool> Update(ICollection<QuestionDto> questions, Quiz quiz)
         {
-            var connectionTable = await _context.QuizQuestions.FirstOrDefaultAsync(qq => qq.QuizId == quiz.Id);
+            var connectionTables = await _context.QuizQuestions.Where(qq => qq.QuizId == quiz.Id).ToListAsync();
 
-            if (connectionTable == null)
+            if (connectionTables == null)
             {
                 return false;
             }
 
             foreach (var question in questions)
             {
-                if (connectionTable.QuestionId != question.Id)
+                foreach (var connectionTable in connectionTables)
                 {
-                    var removingConnectionTable = await _context.QuizQuestions.FirstOrDefaultAsync(qq => qq.QuestionId == question.Id && qq.QuizId == quiz.Id);
-                    _context.QuizQuestions.Remove(removingConnectionTable!);
+                    if (connectionTable.QuestionId != question.Id)
+                    {
+                        _context.QuizQuestions.Remove(connectionTable);
+                    }
                 }
             }
 
