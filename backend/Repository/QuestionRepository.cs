@@ -24,15 +24,8 @@ namespace backend.Repository
             return await _context.Questions.ToListAsync();
         }
 
-        public async Task<bool> Create(ICollection<QuestionDto> questions, Guid quizId)
+        public async Task<bool> Create(ICollection<QuestionDto> questions, Quiz quiz)
         {
-            var quiz = await _context.Quizzes.FindAsync(quizId);
-
-            if (quiz == null)
-            {
-                return false;
-            }
-
             foreach (var question in questions)
             {
                 var existingQuestion = await _context.Questions.FindAsync(question.Id);
@@ -67,7 +60,28 @@ namespace backend.Repository
 
             var saved = await _context.SaveChangesAsync();
 
-            return saved > 0 ? true : false;
+            return saved > 0;
+        }
+
+        public async Task<bool> Update(ICollection<QuestionDto> questions, Quiz quiz)
+        {
+            var connectionTable = await _context.QuizQuestions.FirstOrDefaultAsync(qq => qq.QuizId == quiz.Id);
+
+            if (connectionTable == null)
+            {
+                return false;
+            }
+
+            foreach (var question in questions)
+            {
+                if (connectionTable.QuestionId != question.Id)
+                {
+                    var removingConnectionTable = await _context.QuizQuestions.FirstOrDefaultAsync(qq => qq.QuestionId == question.Id && qq.QuizId == quiz.Id);
+                    _context.QuizQuestions.Remove(removingConnectionTable!);
+                }
+            }
+
+            return await Create(questions, quiz);
         }
     }
 }

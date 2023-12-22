@@ -6,7 +6,7 @@ using backend.Models.Domains;
 
 namespace backend.Models.DTOs
 {
-    public class NewQuizRequestDto
+    public class QuizRequestDto
     {
         public required string Name { get; set; }
         public ICollection<QuestionDto> Questions { get; set; } = [];

@@ -12,5 +12,7 @@ namespace backend.Interfaces
         Task<ICollection<Quiz>> GetAll();
         Task<Quiz?> GetById(Guid id);
         Task<Quiz> Create(string name);
+        Task<bool> Delete(Quiz quiz);
+        Task<bool> Update(Quiz quiz, string name);
     }
 }

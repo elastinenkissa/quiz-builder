@@ -10,6 +10,7 @@ namespace backend.Interfaces
     public interface IQuestionRepository
     {
         Task<ICollection<Question>> GetAll();
-        Task<bool> Create(ICollection<QuestionDto> questions, Guid quizId);
+        Task<bool> Create(ICollection<QuestionDto> questions, Quiz quiz);
+        Task<bool> Update(ICollection<QuestionDto> questions, Quiz quiz);
     }
 }

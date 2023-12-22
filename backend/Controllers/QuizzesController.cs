@@ -72,24 +72,69 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] NewQuizRequestDto newQuizRequestDto)
+        public async Task<IActionResult> Create([FromBody] QuizRequestDto quizRequestDto)
         {
-            var newQuiz = await _quizContext.Create(newQuizRequestDto.Name);
+            var newQuiz = await _quizContext.Create(quizRequestDto.Name);
 
             if (newQuiz == null)
             {
                 return NotFound();
             }
 
-            var questions = await _questionContext.Create(newQuizRequestDto.Questions, newQuiz.Id);
+            var questionsCreated = await _questionContext.Create(quizRequestDto.Questions, newQuiz);
 
-            if (questions == false)
+            if (questionsCreated == false)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             return Ok();
         }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] QuizRequestDto quizRequestDto)
+        {
+            var quiz = await _quizContext.GetById(id);
+
+            if (quiz == null)
+            {
+                return NotFound();
+            }
+
+            var quizUpdated = await _quizContext.Update(quiz, quizRequestDto.Name);
+
+            var questionsUpdated = await _questionContext.Update(quizRequestDto.Questions, quiz);
+
+            if (questionsUpdated == false || quizUpdated == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var deletingQuiz = await _quizContext.GetById(id);
+
+            if (deletingQuiz == null)
+            {
+                return NotFound();
+            }
+
+            var state = await _quizContext.Delete(deletingQuiz);
+
+            if (state == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
 
     }
 }
