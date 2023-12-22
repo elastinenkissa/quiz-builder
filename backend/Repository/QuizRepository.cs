@@ -56,7 +56,11 @@ namespace backend.Repository
             var connectionTable = await _context.QuizQuestions.FirstOrDefaultAsync(qq => qq.QuizId == quiz.Id);
 
             _context.Quizzes.Remove(quiz);
-            _context.QuizQuestions.Remove(connectionTable!);
+
+            if (connectionTable != null)
+            {
+                _context.QuizQuestions.Remove(connectionTable);
+            }
 
             var saved = await _context.SaveChangesAsync();
 

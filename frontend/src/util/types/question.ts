@@ -1,7 +1,7 @@
 export class Question {
 	constructor(
-		public question: string,
+		public content: string,
 		public answer: string,
-		public id: string
+		public id?: string
 	) {}
 }

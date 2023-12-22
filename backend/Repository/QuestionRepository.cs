@@ -83,6 +83,16 @@ namespace backend.Repository
                 }
             }
 
+            if (questions.Count == 0)
+            {
+                foreach (var connectionTable in connectionTables)
+                {
+                    _context.QuizQuestions.Remove(connectionTable);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
             return await Create(questions, quiz);
         }
     }
