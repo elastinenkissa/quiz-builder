@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:5205/api";
+export const baseUrl = "https://app-quizmaker-northeu-dev-001.azurewebsites.net/api";

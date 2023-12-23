@@ -8,7 +8,7 @@
 		"build": "tsc && vite build",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
-		"start": "npm run build && npm run preview"
+		"start": "npm run preview"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.10.8",
